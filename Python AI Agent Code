@@ -1,0 +1,36 @@
+import openai
+
+openai.api_key = "YOUR_API_KEY"
+
+def generate_ads(business, service, location):
+
+    prompt = f"""
+    Create Google Ads campaign assets.
+
+    Business: {business}
+    Service: {service}
+    Location: {location}
+
+    Generate:
+    - 5 headlines
+    - 3 descriptions
+    - 10 keywords
+    """
+
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[{"role":"user","content":prompt}]
+    )
+
+    return response["choices"][0]["message"]["content"]
+
+
+if __name__ == "__main__":
+
+    result = generate_ads(
+        "Law Firm",
+        "Car Accident Lawyer",
+        "California"
+    )
+
+    print(result)
