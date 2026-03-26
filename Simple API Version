@@ -1,0 +1,16 @@
+from fastapi import FastAPI
+from agent import generate_ads
+
+app = FastAPI()
+
+@app.get("/generate")
+
+def generate():
+
+    result = generate_ads(
+        "Law Firm",
+        "Car Accident Lawyer",
+        "California"
+    )
+
+    return {"ads": result}
